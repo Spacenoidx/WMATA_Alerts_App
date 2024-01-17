@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# creating a window
+# Creating a window class
 class MyWindow(tk.Tk):
 
 
@@ -61,6 +61,8 @@ class MyWindow(tk.Tk):
         print(link)
         return link
 
+    #keybind is accessed by this function
+
     def on_entry_key_release(self, event):
         # Get the current content of the entry
         current_text = self.text.get().lower()
@@ -70,6 +72,8 @@ class MyWindow(tk.Tk):
         for item in get_alerts():
             if current_text in item.lower():
                 self.listbox.insert(tk.END, item)
+
+    #test function
     def text_test(self):
         text=self.text.get()
         print(text)
