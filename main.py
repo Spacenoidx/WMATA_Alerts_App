@@ -1,3 +1,5 @@
+# loading modules and libraries needed
+
 from backend.utils import get_alerts
 import tkinter as tk
 from tkinter import messagebox
@@ -6,24 +8,31 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# creating a window
 class MyWindow(tk.Tk):
 
 
     def __init__(self):
         super().__init__()
+
+        # window basics
         self.title("WMATA Bus Alerts")
         self.geometry("600x400")
         self.configure(bg="lightgray")
 
         self.toplabel = tk.Label(text="Search for WMATA Bus alerts", bg="lightgray")
         self.toplabel.pack()
-
+        # the entry field and StringVar that will be wrking on the listbox
         # self.URLfield = self.create_entry_field(label_text="Enter URL here...", width=30)
         self.text = tk.StringVar()
         self.textentry = tk.Entry(self, textvariable=self.text)
 
         self.textentry.bind("<KeyRelease>", self.on_entry_key_release)
         self.textentry.pack()
+
+        #the listbox populated by the alerts function
+
         self.listbox = tk.Listbox(self, height=20, width=60)
         self.listbox.pack()
 
