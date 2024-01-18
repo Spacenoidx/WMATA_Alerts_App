@@ -53,9 +53,7 @@ class MyWindow(tk.Tk):
             # Display a messagebox with the full entry
             messagebox.showinfo("More Info", f"Alert: {selected_item}")
 
-    # def list_alerts(get_alerts):
-    #     for alert in get_alerts:
-    #         self.listbox.insert
+
     def get_the_URL(self):
         link = self.URLentry.get()
         print(link)
