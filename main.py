@@ -23,11 +23,14 @@ class MyWindow(tk.Tk):
         self.toplabel.pack()
         # the entry field and StringVar that will be wrking on the listbox
         # self.URLfield = self.create_entry_field(label_text="Enter URL here...", width=30)
-        self.text = tk.StringVar()
-        self.textentry = tk.Entry(self, textvariable=self.text)
+        self.textentry_var = tk.StringVar()
+        self.textentry = tk.Entry(self, textvariable=self.textentry_var)
 
         self.textentry.bind("<KeyRelease>", self.on_entry_key_release)
         self.textentry.pack()
+
+        # creating the alerts list the first time
+        self.alert_list = get_alerts()
 
         # the listbox populated by the alerts function
 
@@ -43,6 +46,7 @@ class MyWindow(tk.Tk):
         # Bind the show_full_entry method to the double click event
         self.listbox.bind("<Double-Button-1>", self.show_full_entry)
 
+    # function to display a messagebox with the whole entry selected
     def show_full_entry(self, event):
         # Get the selected item from the listbox
         selected_index = self.listbox.curselection()
@@ -51,16 +55,12 @@ class MyWindow(tk.Tk):
             # Display a messagebox with the full entry
             messagebox.showinfo("More Info", f"Alert: {selected_item}")
 
-    def get_the_url(self):
-        link = self.textentry.get()
-        print(link)
-        return link
 
     # keybind is accessed by this function
 
     def on_entry_key_release(self, event):
         # Get the current content of the entry
-        current_text = self.text.get().lower()
+        current_text = self.textentry_var.get().lower()
 
         self.listbox.delete(0, tk.END)
 
@@ -68,20 +68,10 @@ class MyWindow(tk.Tk):
             if current_text in item.lower():
                 self.listbox.insert(tk.END, item)
 
-    # test function
-    def text_test(self):
-        text = self.text.get()
-        print(text)
-
-        self.listbox.delete(0, tk.END)
-
-        for item in get_alerts():
-            if text.lower() in item.lower():
-                self.listbox.insert(tk.END, item)
-
+    # this function uses a function from backend.utils to populate the listbox
+    # self.alert_list = get_alerts() from backend.utils
     def populate_listbox(self):
         self.listbox.delete(1, 100)
-        self.alert_list = get_alerts()
         for alert in self.alert_list:
             self.listbox.insert(tk.END, alert)
         return self.alert_list
