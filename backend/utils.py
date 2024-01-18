@@ -1,12 +1,11 @@
-#Importing modules
+# Importing modules
 
-import tkinter as tk
-from tkinter import messagebox
-import requests
 import os
+
+import requests
 from dotenv import load_dotenv
 
-#load environment variables ("YOUR_API_KEY")
+# load environment variables ("YOUR_API_KEY")
 
 load_dotenv()
 
